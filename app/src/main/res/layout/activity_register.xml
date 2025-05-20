@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:padding="32dp"
+              android:background="@drawable/bg_gradient"
+              tools:context=".RegisterActivity">
+
+    <!-- App Logo/Illustration -->
+    <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_app_logo"
+            android:layout_marginBottom="24dp"/>
+
+    <!-- Welcome Text -->
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Account"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginBottom="32dp"/>
+
+    <!-- Username Input -->
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:shapeAppearanceOverlay="@style/RoundedTextInputLayout"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:startIconDrawable="@drawable/ic_person"
+            app:startIconTint="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Username"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_alpha_60"
+                android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password Input -->
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:shapeAppearanceOverlay="@style/RoundedTextInputLayout"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:startIconDrawable="@drawable/ic_lock"
+            app:startIconTint="@color/white"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/white"
+            app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_alpha_60"
+                android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Confirm Password Input -->
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/confirmPasswordInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:shapeAppearanceOverlay="@style/RoundedTextInputLayout"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:startIconDrawable="@drawable/ic_lock"
+            app:startIconTint="@color/white"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/white"
+            app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_alpha_60"
+                android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password Requirements -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Password must contain:"
+            android:textColor="@color/white_alpha_60"
+            android:textSize="12sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tvLengthRequirement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 8+ characters"
+            android:textColor="@color/white_alpha_60"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/tvUppercaseRequirement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 1 uppercase letter"
+            android:textColor="@color/white_alpha_60"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/tvLowercaseRequirement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 1 lowercase letter"
+            android:textColor="@color/white_alpha_60"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
+            android:id="@+id/tvSpecialRequirement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 1 special character"
+            android:textColor="@color/white_alpha_60"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <!-- Register Button -->
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Register"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            app:cornerRadius="12dp"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:elevation="4dp"
+            android:layout_marginBottom="16dp"/>
+
+    <!-- Login Text -->
+    <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Login"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+</LinearLayout>
