@@ -10,5 +10,6 @@ data class Task(
     val due_date: String,
     val is_done: Boolean,
     val category_id: Int,
+    val category_name: String? = null,
     val user_id: Int
 )

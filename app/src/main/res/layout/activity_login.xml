@@ -27,7 +27,7 @@
             android:textColor="@color/white"
             android:layout_marginBottom="32dp"/>
 
-    <!-- Email Input -->
+    <!-- Username Input -->
     <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailInputLayout"
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="Username"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white_alpha_60"
                 android:inputType="textEmailAddress"/>

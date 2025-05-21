@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.checkbox.MaterialCheckBox
 
 class TaskAdapter(
-    private var tasks: List<Task> = emptyList(),
-    private val onTaskClick: (Task) -> Unit,
-    private val onTaskStatusChange: (Task, Boolean) -> Unit
+    private var tasks: MutableList<Task> = mutableListOf(),
+    private val onTaskClick: (Task) -> Unit
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -19,7 +17,7 @@ class TaskAdapter(
         val tvDueDate: TextView = view.findViewById(R.id.tvDueDate)
         val tvCategory: TextView = view.findViewById(R.id.tvCategory)
         val tvRemarks: TextView = view.findViewById(R.id.tvRemarks)
-        val cbTaskStatus: MaterialCheckBox = view.findViewById(R.id.cbTaskStatus)
+        val tvStatus: TextView = view.findViewById(R.id.tvStatus)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -33,16 +31,12 @@ class TaskAdapter(
         
         holder.tvTaskTitle.text = task.title
         holder.tvDueDate.text = task.due_date
-        holder.tvCategory.text = task.category_id.toString()
+        holder.tvCategory.text = task.category_name
         holder.tvRemarks.text = task.description
-        holder.cbTaskStatus.isChecked = task.is_done
+        holder.tvStatus.text = if (task.is_done) "Completed" else "Not completed"
 
         holder.itemView.setOnClickListener {
             onTaskClick(task)
-        }
-
-        holder.cbTaskStatus.setOnCheckedChangeListener { _, isChecked ->
-            onTaskStatusChange(task, isChecked)
         }
     }
 
@@ -50,7 +44,16 @@ class TaskAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateTasks(newTasks: List<Task>) {
-        tasks = newTasks
+        tasks.clear()
+        tasks.addAll(newTasks)
         notifyDataSetChanged()
+    }
+
+    fun updateTask(updatedTask: Task) {
+        val position = tasks.indexOfFirst { it.id == updatedTask.id }
+        if (position != -1) {
+            tasks[position] = updatedTask
+            notifyItemChanged(position)
+        }
     }
 } 

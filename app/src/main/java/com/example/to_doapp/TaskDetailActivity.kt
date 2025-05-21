@@ -82,6 +82,11 @@ class TaskDetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadTaskDetails()
+    }
+
     private fun loadTaskDetails() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -92,6 +97,18 @@ class TaskDetailActivity : AppCompatActivity() {
                         }
                     }
                     .decodeSingle<Task>()
+
+                task?.let { currentTask ->
+                    val category = supabase.postgrest["categories"]
+                        .select {
+                            filter {
+                                eq("id", currentTask.category_id)
+                            }
+                        }
+                        .decodeSingle<Category>()
+
+                    task = currentTask.copy(category_name = category.name)
+                }
 
                 withContext(Dispatchers.Main) {
                     task?.let { displayTaskDetails(it) }
@@ -108,7 +125,7 @@ class TaskDetailActivity : AppCompatActivity() {
         tvTitle.text = task.title
         tvDescription.text = task.description
         tvDueDate.text = task.due_date
-        tvCategory.text = task.category_id.toString()
+        tvCategory.text = task.category_name ?: "Uncategorized"
         cbTaskStatus.isChecked = task.is_done
     }
 
@@ -117,7 +134,7 @@ class TaskDetailActivity : AppCompatActivity() {
             try {
                 supabase.postgrest["tasks"]
                     .update({
-                        "is_done" to isCompleted
+                        set("is_done", isCompleted)
                     }) {
                         filter {
                             eq("id", taskId)
@@ -134,7 +151,7 @@ class TaskDetailActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@TaskDetailActivity, "Error updating task status", Toast.LENGTH_SHORT).show()
-                    cbTaskStatus.isChecked = !isCompleted // Revert the checkbox state
+                    cbTaskStatus.isChecked = !isCompleted
                 }
             }
         }
